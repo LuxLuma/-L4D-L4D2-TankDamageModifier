@@ -1,1 +1,1 @@
-# [L4D/L4D2]TankDamageModifier
+https://forums.alliedmods.net/showthread.php?p=2421778
