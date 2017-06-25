@@ -42,12 +42,12 @@ public OnPluginStart()
 	else
 		SetFailState("This plugin only runs on Left 4 Dead and Left 4 Dead 2!");
 	
-	CreateConVar("TankDamageModifier_Version", PLUGIN_VERSION, "TankDamageModifier Plugin Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_DONTRECORD|FCVAR_NOTIFY);
+	CreateConVar("TankDamageModifier_Version", PLUGIN_VERSION, "TankDamageModifier Plugin Version", FCVAR_SPONLY|FCVAR_DONTRECORD|FCVAR_NOTIFY);
 	
-	hCvar_DmgEnable = CreateConVar("tank_damage_enable", "1", "Should We Enable Tank Damage Modifing", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	hCvar_Damage = CreateConVar("tank_damage", "20.0", "Damage Modifier Value", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 0.0, true, 9999.0);
-	hCvar_IncapMulti = CreateConVar("tank_damage_modifier", "10.0", "Incapped Damage Multiplyer Value", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 0.0, true, 9999.0);
-	hCvar_ThirdParty = CreateConVar("tank_third_party", "1", "Disable plugin for thirdparty tank support e.g. supertanks, this will only trigger if the enable cvar is enable. (Example cvar if st_on 1 disable damage modifier damage because of supertanks", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	hCvar_DmgEnable = CreateConVar("tank_damage_enable", "1", "Should We Enable Tank Damage Modifing", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	hCvar_Damage = CreateConVar("tank_damage", "20.0", "Damage Modifier Value", FCVAR_NOTIFY, true, 0.0, true, 9999.0);
+	hCvar_IncapMulti = CreateConVar("tank_damage_modifier", "10.0", "Incapped Damage Multiplyer Value", FCVAR_NOTIFY, true, 0.0, true, 9999.0);
+	hCvar_ThirdParty = CreateConVar("tank_third_party", "1", "Disable plugin for thirdparty tank support e.g. supertanks, this will only trigger if the enable cvar is enable. (Example cvar if st_on 1 disable damage modifier damage because of supertanks", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	
 	HookConVarChange(hCvar_DmgEnable, eConvarChanged);
 	HookConVarChange(hCvar_Damage, eConvarChanged);
