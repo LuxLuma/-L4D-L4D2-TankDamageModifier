@@ -1,11 +1,9 @@
-//you should checkout http://downloadtzz.firewall-gateway.com/ for free programs and basicpawn autocomplete func ect
-
 #include <sourcemod>
 #include <sdkhooks>
  
 #pragma semicolon 1
  
-#define PLUGIN_VERSION "1.2"
+#define PLUGIN_VERSION "1.3"
 
 #define ENABLE_AUTOEXEC true
 
@@ -18,18 +16,18 @@ public Plugin:myinfo =
     url = "https://forums.alliedmods.net/showthread.php?p=2421778#post2421778"
 };
 
-new Handle:hCvar_DmgEnable = INVALID_HANDLE;
-new Handle:hCvar_Damage = INVALID_HANDLE;
-new Handle:hCvar_IncapMulti = INVALID_HANDLE;
-new Handle:hCvar_ThirdParty = INVALID_HANDLE;
+static Handle:hCvar_DmgEnable = INVALID_HANDLE;
+static Handle:hCvar_Damage = INVALID_HANDLE;
+static Handle:hCvar_IncapMulti = INVALID_HANDLE;
+static Handle:hCvar_ThirdParty = INVALID_HANDLE;
 
-new bool:g_DmgEnable;
-new bool:g_ThirdParty;
-new Float:g_iDamage;
-new Float:g_iImultiplyer;
+static bool:g_DmgEnable;
+static bool:g_ThirdParty;
+static Float:g_iDamage;
+static Float:g_iImultiplyer;
 
-new bool:g_bDisable = false;
-new ZOMBIECLASS_TANK;
+static bool:g_bDisable = false;
+static ZOMBIECLASS_TANK;
 
 public OnPluginStart()
 {
@@ -96,6 +94,14 @@ public Action:eOnTakeDamage(iVictim, &iAttacker, &iInflictor, &Float:fDamage, &i
 		return Plugin_Continue;
 		
 	if(GetClientTeam(iAttacker) != 3 || GetEntProp(iAttacker, Prop_Send, "m_zombieClass") != ZOMBIECLASS_TANK)
+		return Plugin_Continue;
+	
+	static String:sInflictor[18];
+	GetEntityClassname(iInflictor, sInflictor, sizeof(sInflictor));
+	static String:sWeapon[18];
+	GetClientWeapon(iAttacker, sWeapon, sizeof(sWeapon));
+	
+	if((sInflictor[0] != 't' && !StrEqual(sInflictor, "tank_rock", false)) || StrContains(sWeapon, "tank_claw", false) == -1)
 		return Plugin_Continue;
 	
 	if(IsSurvivorIncapacitated(iVictim))
